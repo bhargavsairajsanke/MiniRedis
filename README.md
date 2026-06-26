@@ -63,6 +63,114 @@ MiniRedis
 ├── README.md
 └── .gitignore
 ```
+## 🚀 Getting Started
+
+### Prerequisites
+
+Before running the project, ensure you have:
+
+* A C++17 compatible compiler (`g++`)
+* Git (optional, for cloning the repository)
+
+---
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/bhargavsairajsanke/MiniRedis.git
+cd MiniRedis
+```
+
+---
+
+## Build the Project
+
+### Linux / WSL
+
+```bash
+g++ main.cpp KeyValueStore.cpp CommandParser.cpp Persistence.cpp -std=c++17 -o miniredis
+```
+
+### Windows (MinGW)
+
+```bash
+g++ main.cpp KeyValueStore.cpp CommandParser.cpp Persistence.cpp -std=c++17 -o miniredis.exe
+```
+
+---
+
+## Run the Application
+
+### Linux / WSL
+
+```bash
+./miniredis
+```
+
+### Windows
+
+```powershell
+.\miniredis.exe
+```
+
+---
+
+## Sample Commands
+
+```text
+SET name Bhargav
+GET name
+
+SET college IITKGP
+GET college
+
+SET otp_user123 483921 EXPIRE 5
+GET otp_user123
+
+(wait 6 seconds)
+
+GET otp_user123
+
+SET name Sai NX
+
+EXISTS name
+
+COUNT
+
+KEYS
+
+SAVE
+
+EXIT
+```
+
+---
+
+## Expected Output
+
+```text
+OK
+Bhargav
+
+OK
+IITKGP
+
+OK
+483921
+
+Key not found
+
+Key already exists.
+
+true
+
+2
+
+name
+college
+
+Database saved successfully.
+```
 
 ---
 
