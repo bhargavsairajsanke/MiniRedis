@@ -142,6 +142,7 @@ int main() {
         }
 
         else if (cmd.name == "SAVE") {
+            store.removeExpiredKeys();
             cout << (persistence.save(store)
                      ? "Database saved successfully.\n"
                      : "Failed to save database.\n");
