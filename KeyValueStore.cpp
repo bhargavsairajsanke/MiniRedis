@@ -13,6 +13,23 @@ void KeyValueStore::removeExpired(const string& key) {
     }
 }
 
+void KeyValueStore::removeExpiredKeys()
+{
+    std::vector<std::string> expired;
+
+    for (const auto& item : expiryTime)
+    {
+        if (time(nullptr) >= item.second)
+            expired.push_back(item.first);
+    }
+
+    for (const std::string& key : expired)
+    {
+        database.erase(key);
+        expiryTime.erase(key);
+    }
+}
+
 void KeyValueStore::set(
     const string& key,
     const string& value
@@ -56,17 +73,8 @@ bool KeyValueStore::exists(const string& key) {
 }
 
 vector<string> KeyValueStore::getAllKeys() {
-    vector<string> expired;
 
-    for (const auto& item : expiryTime) {
-        if (time(nullptr) >= item.second)
-            expired.push_back(item.first);
-    }
-
-    for (const string& key : expired) {
-        database.erase(key);
-        expiryTime.erase(key);
-    }
+    removeExpiredKeys();
 
     vector<string> keys;
 
@@ -82,7 +90,7 @@ void KeyValueStore::clear() {
 }
 
 size_t KeyValueStore::count() {
-    getAllKeys();   // cleanup expired keys first
+    removeExpiredKeys();
     return database.size();
 }
 
