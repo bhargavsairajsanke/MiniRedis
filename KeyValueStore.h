@@ -10,10 +10,12 @@ class KeyValueStore {
 private:
     std::unordered_map<std::string, std::string> database;
     std::unordered_map<std::string, std::time_t> expiryTime;
-
     void removeExpired(const std::string& key);
+   
 
 public:
+     
+     void removeExpiredKeys(); 
     void set(const std::string& key, const std::string& value);
 
     void setWithExpiry(
